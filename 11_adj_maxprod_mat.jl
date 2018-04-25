@@ -1,10 +1,8 @@
 
-using IterTools: partition
-using Base.LinAlg: checksquare
-
 function adj_maxprod_mat(M::Array{T, 2}, n = 4) where T
+    size(M, 1) == size(M, 2) || error("Input matrix should be a square matrix, but has dimensions $(size(M))")
+    M_size  = size(M, 1)
     maxprod = zero(T)
-    M_size  = LinAlg.checksquare(M)
 
     #columnwise
     for c in 1:M_size
@@ -32,8 +30,8 @@ function adj_maxprod_mat(M::Array{T, 2}, n = 4) where T
 end
 
 function vector_maxprod(v::Array{T, 1}, n, curr_max=zero(T)) where T
-    for adj::NTuple{n, T} in partition(v, n)
-        curr_max = max(curr_max, prod(adj))
+    for idx in 1:(length(v) - n + 1)
+        curr_max = max(curr_max, prod(v[idx:idx+n-1]))
     end
     curr_max
 end
