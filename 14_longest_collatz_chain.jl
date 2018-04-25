@@ -1,4 +1,10 @@
 
+"""
+longest_collatz_chain([lim = 1_000_000]) -> (n, l)
+
+Find the number with the longest Collatz chain length under the given limit lim. 
+Return both the number (n) and the length of its chain (l)
+"""
 function longest_collatz_chain(lim = 1_000_000)
     maxlen = 0
     maxlen_n = 1
@@ -9,7 +15,7 @@ function longest_collatz_chain(lim = 1_000_000)
             maxlen_n = n
         end
     end
-    maxlen_n
+    (maxlen_n, maxlen)
 end
 
 # memoization 
