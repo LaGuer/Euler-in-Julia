@@ -1,6 +1,11 @@
 
 
 function num_downright_paths(gridsz = 20)
+    #easy way: binomial(2*gridsz, gridsz)
+    #(gridsz right steps + gridsz down steps) to get from src to dest, only choice
+    # is where to intermingle the down steps among the total steps - so, which gridsz
+    # positions to choose for down steps, among the total 2*gridsz steps taken. ∴  (2g)Cg
+
     # grid size in problem spec refers to number of edges, so no. of pts is +1 that
     grid = fill(-1, gridsz+1, gridsz+1)
 
