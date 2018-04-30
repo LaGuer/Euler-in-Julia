@@ -15,43 +15,9 @@ const p18_triangle = [75 00 00 00 00 00 00 00 00 00 00 00 00 00 00
                       63 66 04 68 89 53 67 30 73 16 69 87 40 31 00
                       04 62 98 27 23 09 70 98 73 93 38 53 60 04 23]
 
-
-function max_triangle_sum(M)
-    @assert istril(M) "Input matrix m should be lower triangular, eg. [2 0 0; 3 5 0; 7 11 13]"
-
-    max_sum_below(M, 1, 1)
-end
-
-function max_sum_below(M, i, j)
-    (nrows, ncols) = size(M)
-    if i == nrows
-        return M[i, j] #nothing below this
-    elseif j > i
-        return 0 #in the zero filled triangle
-    end
-
-    M_max_sum_below = copy(M)
-    relevant_rows = (nrows-1):-1:i
-    for r in relevant_rows
-        relevant_cols = j:j+(r-i)
-        for c in relevant_cols
-            M_max_sum_below[r, c] += max(M_max_sum_below[r+1, c], M_max_sum_below[r+1, c+1])
-        end
-    end
-
-    M_max_sum_below[i, j]
-end
+include(@__DIR__() * "/_max_triangle_sum.jl")
 
 if !isinteractive()
-    rm = match(r"^\d+", PROGRAM_FILE)
-    local M::Array{Int}
-    if rm.match == "18"
-        M = p18_triangle
-    elseif rm.match == "67"
-        M = p67_triangle
-    else
-        error("File name $(PROGRAM_FILE) doesn't start with Euler problem number.")
-    end
-    println(max_triangle_sum(M))
+    println(max_triangle_sum(p18_triangle))
 end
 
