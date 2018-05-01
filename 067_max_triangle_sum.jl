@@ -1,6 +1,6 @@
 
 function get_p67_triangle()::Array{Int,2}
-    M = readdlm(@__DIR__() * "/p67_triangle.txt")
+    M = readdlm(@__DIR__() * "/067data_triangle.txt")
     M[M .== ""] = 0
     M
 end

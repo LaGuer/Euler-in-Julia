@@ -1,6 +1,6 @@
 
 
-name_scores_total() = name_scores_total(@__DIR__()*"/p22_names.txt")
+name_scores_total() = name_scores_total(@__DIR__()*"/022data_names.txt")
 name_scores_total(names_file::String) = name_scores_total(vec(readdlm(names_file, ',', String)))
 
 function name_scores_total(names_list::Array{String})
