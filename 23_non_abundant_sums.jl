@@ -3,26 +3,17 @@
 const ABUNDANT_SUM_LIMIT = 28123
 
 function non_abundant_sums()
-    #Total value of non-abundant-sum numbers
-    non_abundant_sum_total = sum(1:23)
     abundant_nums = get_abundant_nums_upto(ABUNDANT_SUM_LIMIT)
 
-    for n in 25:ABUNDANT_SUM_LIMIT
-        if !is_sum_of_pair(n, abundant_nums)
-            non_abundant_sum_total += n
-        end
-    end
-    non_abundant_sum_total 
-end
-
-function is_sum_of_pair(n, narray)
-    for i in narray
-        if (n - i) in narray
-            return true
+    is_abundant_sum = falses(ABUNDANT_SUM_LIMIT)
+    for n in abundant_nums, m in abundant_nums
+        s = n + m
+        if s ≤ ABUNDANT_SUM_LIMIT
+            is_abundant_sum[s] = true
         end
     end
 
-    return false
+    sum(find(.!is_abundant_sum))
 end
 
 @inline is_abundant(n) = sum(proper_divisors(n)) > n
