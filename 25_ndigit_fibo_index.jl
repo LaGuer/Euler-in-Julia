@@ -4,6 +4,10 @@
 function ndigit_fibo_index(n = 1000)
     n < 1 && throw(ArgumentError("Number of digits n should be a positive integer (was $n)"))
     n == 1 && return 1
+
+    #easy way from Project Euler forums (40000x faster):
+    # ndf(n) = n == 1 ? 1 : ceil(Int, ((n-1) + log10(5)/2)/log10(golden))
+
     f1 = big(1)
     f2 = big(1)
 
