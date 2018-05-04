@@ -3,7 +3,7 @@
 function primesum(limit::T = 2_000_000) where T<:Integer
     #easy way: using Primes; sum(primes(limit)) 
 
-    #hard way (20x slower, 60x more memory, compared to easy way): 
+    #hard way (4x slower, 10x less memory, compared to easy way): 
     is_prime_num = BitVector(limit)
     is_prime_num .= true
 
@@ -11,8 +11,9 @@ function primesum(limit::T = 2_000_000) where T<:Integer
     for i::T in 2:limit
         if is_prime_num[i]
             psum += i
-            multiples_of_i = [k*i for k in 2:(limit÷i)]
-            is_prime_num[multiples_of_i] .= false
+            for k in 2:(limit÷i)
+                is_prime_num[k*i] = false
+            end
         end
     end
     psum
