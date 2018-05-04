@@ -24,19 +24,15 @@ function get_cycle_length(n)
             num *= 10
             pos_in_quot += 1
         end
-        q = num ÷ den
         r = num % den
-        r == 0 && break #terminating, no recurring cycle here
+
+        r == 0 && return 0 #terminating, no recurring cycle here
         if r in keys(seen_rems_pos)
-            cycle_len = (pos_in_quot + 1) - seen_rems_pos[r]
-            break
+            return (pos_in_quot - seen_rems_pos[r])
         end
         seen_rems_pos[r] = pos_in_quot
-        pos_in_quot += 1
         num = r
     end
-
-    cycle_len
 end
 
 if !isinteractive()
