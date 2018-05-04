@@ -12,10 +12,14 @@ function get_max_cycle(lim = 1000)
     (max_n, max_cycle)
 end
 
+"""
+get_cycle_length(n)
+Find the length of the recurring cycle in the decimal expansion of 1/n
+(Returns 0 if 1/n is a terminating decimal.)
+"""
 function get_cycle_length(n)
     num = 1
     den = n
-    cycle_len = 0
 
     seen_rems_pos = Dict{Int, Int}()
     pos_in_quot   = 0
