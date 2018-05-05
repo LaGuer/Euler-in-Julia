@@ -35,15 +35,18 @@ a@l = 1 - 6l + 8(l + l-1 + l-2 + ... 1) = 1 - 6l + 8l(l+1)/2 = 1 - 6l + 4l(l+1)
 So, Sn = 4(1 - 6l + 4l(l+1) + 3l) = 4(1 - 3l + 4l(l + 1)) = 4(1 - 3l + 4l² + 4l)
 Sn at layer l = 4(1 + l + 4l²) = 4(1 + l(1 + 4l))
 
+Now, we need 1 + sum of all Sn over all layers. According to Wolfram Alpha,
+Σ4(l + l(1 + 4l)) over (l=1 to n) = (2n/3) *(8n² + 15n + 13)
+Hence, layers_sum = 2num_layers/3 * (8*num_layers² + 15num_layers + 13)
+Since num_layers = (dim-1)/2, that becomes:
+layers_sum = (dim-1)/3 * (2(dim-1)² + 15(dim-1)/2 + 13)
+= (dim-1)/3 * (4(dim-1)² + 15(dim-1) + 26)/2 = (dim-1)(4(dim² - 2dim + 1) + 15dim - 15 + 26)/6
+= (dim-1)(4dim² - 8dim + 4 + 15dim + 11)/6   = (dim-1)(4dim² + 7dim + 15)/6
 
+So, adding the central 1 to that, diagonals_sum = 1 + (dim-1)(4dim² + 7dim + 15)/6
 """
 function spiral_diag_sum(dim = 1001)
-    num_layers = (dim - 1)÷2
-
-    layers_sum = 1 + 
-    @parallel (+) for l in 1:num_layers
-        4(1 + l*(1 + 4l))
-    end
+    1 + (dim - 1)*(4dim^2 + 7dim + 15)÷6
 end
 
 if !isinteractive()
