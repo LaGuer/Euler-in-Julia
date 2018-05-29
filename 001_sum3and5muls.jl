@@ -20,4 +20,6 @@ function sum3and5muls(lim::T) where T<:Integer
     #(as of 0.6.0, this method is 300 times faster than a for loop with %3 and %5)
 end
 
-println(sum3and5muls(1000))
+if !isinteractive()
+    println(sum3and5muls(1000))
+end

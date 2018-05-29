@@ -6,3 +6,6 @@ function sum_sqr_diff(l)
     diff = sq_of_sum - sum_of_sq
 end
 
+if !isinteractive()
+    println(sum_sqr_diff(100))
+end

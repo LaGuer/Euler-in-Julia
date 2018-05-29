@@ -15,3 +15,6 @@ function lcm_upto(l)
     mult
 end
 
+if !isinteractive()
+    println(lcm_upto(20))
+end

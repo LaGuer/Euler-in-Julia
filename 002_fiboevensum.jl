@@ -15,5 +15,6 @@ function fiboevensum(lim)
     s
 end
 
-println(fiboevensum(4000000))
-
+if !isinteractive()
+    println(fiboevensum(4000000))
+end

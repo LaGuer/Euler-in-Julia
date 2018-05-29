@@ -30,3 +30,7 @@ end
     return true
 end
 
+if !isinteractive()
+    println(nth_prime())
+end
+

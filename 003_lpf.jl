@@ -8,5 +8,6 @@ function lpf(n::T) where T<:Integer
     #see repository LargestPrimeFactor
 end
 
-println(lpf(600851475143))
-
+if !isinteractive()
+    println(lpf(600851475143))
+end

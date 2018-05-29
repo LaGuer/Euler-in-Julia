@@ -22,4 +22,6 @@ function ispalin(n)
     dn == reverse(dn)
 end
 
-println(largestpalinprod())
+if !isinteractive()
+    println(largestpalinprod())
+end
