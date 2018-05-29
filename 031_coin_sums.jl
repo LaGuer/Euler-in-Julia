@@ -32,7 +32,10 @@ function num_dioph_solns(total, coeffs)
             lower_t_lim = ceil(-u*total/b)
             num_solutions = length(lower_t_lim:upper_t_lim)
         end
-    else #TODO: better way of doing this, maybe Smith-normal matrices, at least make non-recursive
+    else
+        #TODO: find better way of doing this, maybe Smith-normal matrices
+        # or check if dynamic programming is faster
+        #NOTE: a non-generic version could use `Base.Cartesian.@nloops 6 #...`
         c1 = coeffs[1]
         num_solutions = 0
         for x1 in 0:div(total, c1)
