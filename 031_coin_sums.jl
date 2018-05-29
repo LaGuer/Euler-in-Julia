@@ -9,6 +9,7 @@ function coin_sums_count(total = 200, denoms = [200, 100, 50, 20, 10, 5, 2, 1])
     for c in coin_combs
         counter += num_dioph_solns(total, c)
     end
+    counter
 end
 
 """
@@ -20,9 +21,7 @@ where [c1, c2, c3, ...] = C, and x1, x2, x3, ... are the unknowns to solve for.
 function num_dioph_solns(total, coeffs)
     if length(coeffs) == 1
         #if there's only one value, only solution is if it multiplies to total exactly
-        if total % coeffs[1] == 0
-            return 1
-        end
+        return (total % coeffs[1] == 0) ? 1 : 0
     elseif length(coeffs) == 2
         (a, b) = coeffs[:]
         (d, u, v) = gcdx(a, b)
@@ -48,3 +47,4 @@ end
 if !isinteractive()
     println(coin_sums_count())
 end
+
