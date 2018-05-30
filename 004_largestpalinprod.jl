@@ -2,19 +2,24 @@
 function largestpalinprod(digits=3)
     max_n = 10^digits - 1
     min_n = 10^(digits - 1)
-    n_range = max_n:-1:min_n
+    lpp   = 0
+    lpp_i = 0
 
-    t_range = max_n^2:-1:min_n^2
-    for t in t_range
-        if ispalin(t)
-            for n in n_range
-                if t % n == 0 && (t÷n in n_range)
-                    return :($t = $n * $(t÷n))
-                end
+    for i in max_n:-1:min_n
+        for j in i:-1:min_n
+            p = i*j
+            p < lpp && break #lower j's will only give lower products
+            if ispalin(p)
+                lpp = p
+                lpp_i = i
             end
         end
     end
-    error("Something's wrong: no palindrome found among products of $digits digit numbers")
+    if lpp > 0
+        return :($lpp = $lpp_i * $(lpp÷lpp_i))
+    else
+        error("Something's wrong: no palindrome found among products of $digits digit numbers")
+    end
 end
 
 function ispalin(n)
