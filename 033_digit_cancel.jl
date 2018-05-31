@@ -2,32 +2,27 @@
 """
 Return the denominator of the lowest form of the product of:
 all the non-trivial digit-canceling fractions that are less than 1 in value and 
-have two digits in the numerator and two in the denominator. 
+have two digits in the numerator and two in the denominator (where non-trivial requires
+that the canceled digit is not a 0.)
 Phew.
 """
 function p33()
-    prod(digit_canceling_fracs())
+    denominator(prod(digit_canceling_fracs()))
 end
 
 function digit_canceling_fracs()
-    numer = 11
     result = Vector{Rational}()
-    while numer < 99
-        denom = numer + 1
+    for numer in 11:98
+        (numer % 10 == 0) && continue
         nd = digits(numer)
-        while denom < 100 #better to construct denom from numer digits? 
+        for denom in (numer+1):100 #better to construct denom from numer digits? 
+            (denom % 10 == 0) && continue
             dd = digits(denom)
             (is_cancelable, newnumer, newdenom) = cancel_digit(nd, dd)
-            if is_cancelable
-                if newnumer//newdenom == numer//denom
-                    push!(result, numer//denom)
-                end
+            if is_cancelable && (newnumer//newdenom == numer//denom)
+                push!(result, numer//denom)
             end
-            denom += 1
-            denom += (denom % 10 == 0) ? 1 : 0 #skip 20, 30, 40, etc.
         end
-        numer += 1
-        numer += (numer % 10 == 0) ? 1 : 0 #skip 20, 30, 40, etc.
     end
     result
 end
