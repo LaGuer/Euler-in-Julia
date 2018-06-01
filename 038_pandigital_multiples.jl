@@ -38,7 +38,7 @@ function largest_pandig_prod()
     =#
     d1 = 9
     (d5, d6) = (1, 8)
-    allowed_digits = collect(2:7)
+    allowed_digits = collect(7:-1:2)
     for d2 in [3, 2] #reverse order so we find largest number first
         allowed_d3 = allowed_digits[allowed_digits .!= d2]
         for d3 in allowed_d3
@@ -47,7 +47,7 @@ function largest_pandig_prod()
                 i = 9000 + d2*100 + d3*10 + d4
                 allowed_d678 = allowed_d4[allowed_d4 .!= d4]
                 prod2 = i*2
-                if sort(digits(prod2)) == [1, allowed_d678..., 8]
+                if sort(digits(prod2), rev=true) == [8, allowed_d678..., 1]
                     return i * 100000 + prod2
                 end
             end
