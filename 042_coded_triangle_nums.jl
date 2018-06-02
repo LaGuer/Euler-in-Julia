@@ -1,6 +1,5 @@
 
 const letter_values = Dict((c => c - 'A' + 1 for c in 'A':'Z'))
-const tri_nums      = [n*(n+1)÷2 for n in 1:20] #max word value in file is 192
 
 """
 count_triangle_words([filename])
@@ -17,7 +16,7 @@ function count_triangle_words(filename)
     s = readuntil(fs, ',')
     while !isempty(s)
         w = strip(chop(s), '"')
-        if get_word_value(w) in tri_nums
+        if is_tri_num(get_word_value(w))
             n += 1
         end
         s = readuntil(fs, ',')
@@ -27,11 +26,16 @@ end
 
 get_word_value(w) = sum((letter_values[c] for c in w))
 
+is_tri_num(n) = isinteger((-1 + sqrt(1 + 8n))/2)
+
 #=
 
 n²+n = 2tₙ => n² + n - 2tₙ = 0
 soln: n = (-1 ± √(1 + 8t))/2
-if (√(1+8t)/2 - 1) is a positive integer, tₙ is a triangle number
+if ((-1 + √(1+8t))/2) is a positive integer, tₙ is a triangle number
 sqrt may be costly, decide whether to use this or precalculating tri nums, based on word value ranges.
+Result: precalc and formula methods perform the same, so use formula since it's more generic
 
 =#
+isinteractive() || println(count_triangle_words())
+
