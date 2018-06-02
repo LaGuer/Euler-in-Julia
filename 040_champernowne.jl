@@ -46,3 +46,5 @@ if n in (10+90*2):((10+90*2)+(900*3)-1) -> n -= 190; d is (n%3 + 1)th digit in (
 
 =#
 
+isinteractive() || println(champernowne_prod())
+
