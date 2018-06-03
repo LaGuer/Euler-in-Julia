@@ -8,9 +8,9 @@ function sum_subdiv_pandig()
     for d_10 in 0:9
         used_digits[10] = d_10
         @nloops(9, d,
-                (n -> allowed_digits_at(n, used_digits)), #range expr
-                (n -> used_digits[n] = d_n), # pre-expr
-                begin
+                (n -> allowed_digits_at(n, used_digits)), # range expr
+                (n -> used_digits[n] = d_n),              # pre-expr
+                begin                                     # loop body
                     sdpd_num = num_from_digits(reverse(used_digits))
                     s += sdpd_num
                 end)
@@ -23,6 +23,7 @@ d4 is an even digit
 d3+d4+d5 is one of 6, 9, 12, 15, 18, 21, 24, 27 (0 and 3 totals need repeating digits)
 d6 is 5 or 0
 d6 + d8 - d7 is either 0 or 11
+If d6 was 0, d8==d7 or d8-d7=11, neither is possible, so **d6 can only be 5**
 =#
 function allowed_digits_at(n, used_digits)
     allowed = setdiff(digits0to9, Set(used_digits[10:-1:(n+1)]))
@@ -36,7 +37,7 @@ function allowed_digits_at(n, used_digits)
         end
     elseif n == 6 #check d4d5d6 is divisible by 5 and d6d7d8 is divisible by 11 here
         filter!(allowed) do d
-            (d == 0 || d == 5) &&
+            (d == 5) &&
             (d + used_digits[8] - used_digits[7]) in (0, 11)
         end
     elseif n == 5 #check d5d6d7 is divisible by 7
