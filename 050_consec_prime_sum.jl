@@ -15,7 +15,7 @@ function max_consec_prime_sum(lim=1_000_000)
             consecsum += 3
             l = 2
         end
-        while consecsum < lim && (i + l + 1) < endof(primenumbers)
+        while consecsum < lim && (i + l + 1) < lastindex(primenumbers)
             #at this point, consecsum is odd, and will remain odd (and hence potential prime)
             # only after we add *two* odd numbers
             consecsum += primenumbers[i + l] + primenumbers[i + l + 1]
@@ -26,6 +26,10 @@ function max_consec_prime_sum(lim=1_000_000)
         end
     end
     (starterp, maxl, maxconsecsum)
+end
+
+if VERSION ≤ v"0.6.3"
+    const lastindex = endof
 end
 
 isinteractive() || println(max_consec_prime_sum())

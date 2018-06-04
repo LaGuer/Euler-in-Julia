@@ -17,9 +17,12 @@ function is_palin(n::Integer)
 end
 
 function is_binary_palin(n::Integer)
-    #for v0.7: bin(n) = string(n, base=2)
     bn = bin(n)
     reverse(bn) == bn
+end
+
+if VERSION > v"0.6.3"
+    bin(n) = string(n, base=2)
 end
 
 if !isinteractive()
